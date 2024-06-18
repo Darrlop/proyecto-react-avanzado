@@ -1,0 +1,28 @@
+// export const AUTH_LOGIN = 'auth/login';
+
+// export const AUTH_LOGOUT = 'auth/logout';
+
+// export const ADVERTS_LOADED = 'adverts';
+
+// export const ADVERT_DETAIL = 'adverts/:advertId';
+
+// export const ADVERT_NEW = 'adverts/new';
+
+
+export const AUTH_LOGIN_PENDING = 'auth/login/pending';
+export const AUTH_LOGIN_FULFILLED = 'auth/login/fulfilled';
+export const AUTH_LOGIN_REJECTED = 'auth/login/rejected';
+
+export const AUTH_LOGOUT = 'auth/logout';
+
+export const ADVERTS_LOADED_PENDING = 'adverts/pending';
+export const ADVERTS_LOADED_FULFILLED = 'adverts/fulfilled';
+export const ADVERTS_LOADED_REJECTED = 'adverts/rejected';
+
+export const ADVERT_DETAIL_PENDING = 'adverts/:advertId/pending';
+export const ADVERT_DETAIL_FULFILLED = 'adverts/:advertId/fulfilled';
+export const ADVERT_DETAIL_REJECTED = 'adverts/:advertId/rejected';
+
+export const ADVERT_NEW_PENDING = 'adverts/new/pending';
+export const ADVERT_NEW_FULFILLED = 'adverts/new/fulfilled';
+export const ADVERT_NEW_REJECTED = 'adverts/new/rejected';
