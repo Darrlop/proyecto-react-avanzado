@@ -8,6 +8,9 @@ import './index.css';
 import App from './components/app';
 import { AuthProvider } from './components/auth/context';
 
+//balizaredux
+import configureStore from './store';
+
 const accessToken = storage.get('auth');
 configureClient({ accessToken });
 
