@@ -1,26 +1,32 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
+//balizaredux
+import { Provider } from 'react-redux';
 
 import { configureClient } from './api/client';
 import storage from './utils/storage';
 import './index.css';
 import App from './components/app';
-import { AuthProvider } from './components/auth/context';
+//xx import { AuthProvider } from './components/auth/context';
 
 //balizaredux
 import configureStore from './store';
+//xx const store = configureStore();
+
 
 const accessToken = storage.get('auth');
 configureClient({ accessToken });
 
+const store = configureStore({ auth: !!accessToken });
+
 const root = createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <AuthProvider isInitiallyLogged={!!accessToken}>
+    <Provider store={store}>
+      <Router>
         <App />
-      </AuthProvider>
-    </Router>
+      </Router>
+    </Provider>
   </React.StrictMode>,
 );

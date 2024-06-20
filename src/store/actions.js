@@ -11,7 +11,8 @@ import {
   ADVERT_DETAIL_REJECTED,
   ADVERT_NEW_PENDING,
   ADVERT_NEW_FULFILLED,
-  ADVERT_NEW_REJECTED
+  ADVERT_NEW_REJECTED,
+  UI_RESET_ERROR
 } from './types'
 
 export const authLoginPending = () => ({
@@ -46,4 +47,9 @@ export const authLogin = credentials => {
 
 export const authLogout = () => ({
   type: AUTH_LOGOUT,
+});
+
+
+export const uiResetError = () => ({
+  type: UI_RESET_ERROR,
 });
