@@ -1,11 +1,14 @@
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
+import { thunk } from "redux-thunk";
 
 import * as reducers from './reducers';
-
 import * as actionCreators from './actions';
 
 const reducer = combineReducers(reducers);
+
+// composeEnhancers para habilitar devtools
+const composeEnhancers = composeWithDevTools({ actionCreators });
 
 export default function configureStore(preloadedState) {
   //más adelante
@@ -13,7 +16,9 @@ export default function configureStore(preloadedState) {
   const store = createStore(
     reducer,
     preloadedState,
-    composeWithDevTools({ actionCreators })(),
+    //composeWithDevTools({ actionCreators })(),
+    composeEnhancers(applyMiddleware(thunk)),
+
   );
   return store;
 }
