@@ -29,6 +29,7 @@ export const authLoginRejected = error => ({
   error: true,
 });
 
+
 //Defino el thunk para login
 export const authLogin = credentials => {
   return async function (dispatch, _getState, { services: { auth }, router }) {
@@ -44,6 +45,7 @@ export const authLogin = credentials => {
     }
   };
 };
+
 
 export const authLogout = () => ({
   type: AUTH_LOGOUT,
