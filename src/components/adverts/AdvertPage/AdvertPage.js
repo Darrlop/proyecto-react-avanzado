@@ -18,35 +18,15 @@ import { getUi } from '../../../store/selectors';
 
 function AdvertPage() {
   const { advertId } = useParams();
-
-  // const advert = useSelector(getAdvert(advertId));
-  // console.log("advert en page", advert)
+  const advert = useSelector(getAdvert(advertId));
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  //Quitar?
-  //const [advert, setAdvert] = useState(null);
-  //const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   getAdvert(advertId)
-  //     .then(advert => {
-  //       setAdvert(advert);
-  //       setIsLoading(false);
-  //     })
-  //     .catch(error => {
-  //       setIsLoading(false);
-  //       navigateAfterRequestError(error, navigate);
-  //     });
-  // }, [advertId, navigate]);
 
   useEffect(() => {
     dispatch(loadAdvert(advertId));
   }, [dispatch, advertId]);
-
-  const advert = useSelector(getAdvert(advertId));
-  console.log("advert en page", advert)
 
   const handleDeleteAdvert = () => {
     dispatch(deleteAdvert(advertId));
