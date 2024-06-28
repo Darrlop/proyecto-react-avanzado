@@ -10,6 +10,7 @@ import {
   // ADVERT_DETAIL_PENDING,
   // ADVERT_DETAIL_FULFILLED,
   // ADVERT_DETAIL_REJECTED,
+  ADVERT_DELETED_FULFILLED,
   // ADVERT_NEW_PENDING,
   // ADVERT_NEW_FULFILLED,
   // ADVERT_NEW_REJECTED,
@@ -49,17 +50,15 @@ export function adverts(state = defaultState.adverts, action) {
       return { loaded: true, data: action.payload };
     case ADVERT_DETAIL_FULFILLED:
       return { ...state, data: [action.payload] };
+    case ADVERT_DELETED_FULFILLED:
+      return {
+        ...state,
+        data: state.data.filter(advert => advert.id !== action.payload),
+      };
     default:
       return state;
   }
 }
-
-//BALIZA falta añadir los advets y  luego refactorizar con combineReducers
-// export default function reducer(state = defaultState, action) {
-//   return {
-//     aut: auth(state.auth, action)
-//   }
-// }
 
 
 export function ui(state = defaultState.ui, action) {

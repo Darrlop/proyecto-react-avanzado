@@ -12,13 +12,15 @@ import {
   ADVERT_NEW_PENDING,
   ADVERT_NEW_FULFILLED,
   ADVERT_NEW_REJECTED,
-  ADVERT_DELETE_PENDING,
-  ADVERT_DELETE_FULFILLED,
-  ADVERT_DELETE_REJECTED,
+  ADVERT_DELETED_PENDING,
+  ADVERT_DELETED_FULFILLED,
+  ADVERT_DELETED_REJECTED,
   UI_RESET_ERROR
 } from './types'
 
 import { getAdvert, getAreAdvertsLoaded, getAreTagsLoaded } from './selectors';
+import { createAdvert } from '../components/adverts/service';
+
 
 export const authLoginPending = () => ({
   type: AUTH_LOGIN_PENDING,
@@ -122,15 +124,15 @@ export const loadAdvert = advertId => {
 };
 
 
-export const advertsDeletedRequest = () => ({
-  type: ADVERT_DELETE_PENDING,
+export const advertsDeletedPending = () => ({
+  type: ADVERT_DELETED_PENDING,
 });
-export const advertsDeletedSuccess = advert => ({
-  type: ADVERT_DELETE_FULFILLED,
+export const advertsDeletedFulfilled = advert => ({
+  type: ADVERT_DELETED_FULFILLED,
   payload: advert
 });
-export const advertsDeletedFailure = error => ({
-  type: ADVERT_DELETE_REJECTED,
+export const advertsDeletedRejected = error => ({
+  type: ADVERT_DELETED_REJECTED,
   error: true,
   payload: error
 });
@@ -138,16 +140,43 @@ export const advertsDeletedFailure = error => ({
 export const deleteAdvert = advertId => {
   return async function (dispatch, _getState, { services: { adverts }, router }) {
     try {
-      dispatch(advertsDeletedRequest());
+      dispatch(advertsDeletedPending());
       await adverts.deleteAdvert(advertId);
-      dispatch(advertsDeletedSuccess(advertId));
+      dispatch(advertsDeletedFulfilled(advertId));
       router.navigate(`/adverts`);
     } catch (error) {
-      dispatch(advertsDeletedFailure(error));
+      dispatch(advertsDeletedRejected(error));
     }
   };
 };
 
+
+export const advertNewPending = () => ({
+  type: ADVERT_NEW_PENDING,
+});
+export const advertNewFulfilled = advert => ({
+  type: ADVERT_NEW_FULFILLED,
+  payload: advert,
+});
+export const advertNewRejected = error => ({
+  type: ADVERT_NEW_REJECTED,
+  error: true,
+  payload: error,
+});
+
+export const createNewAdvert = newAdvert => {
+  return async function (dispatch, _getState, { services: { adverts }, router }) {
+    try {
+      dispatch(advertNewPending());
+      const advert = await adverts.createAdvert(newAdvert);
+      dispatch(advertNewFulfilled(advert));
+      //router.navigate(`/adverts/${advert.id}`);
+      router.navigate(`/adverts`);
+    } catch (error) {
+      dispatch(advertNewRejected(error));
+    }
+  };
+};
 
 export const uiResetError = () => ({
   type: UI_RESET_ERROR,
