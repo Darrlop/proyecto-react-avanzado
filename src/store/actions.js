@@ -66,8 +66,6 @@ export const advertsLoadedRejected = error => ({
   error: true,
 });
 
-
-
 //Defino el thunk para anuncios
 export const loadAdverts = () => {
   return async function (dispatch, getState, { services: { adverts } }) {
@@ -86,6 +84,38 @@ export const loadAdverts = () => {
       dispatch(advertsLoadedRejected(error));
       throw error;
     }
+  };
+};
+
+export const advertDetailPending = () => ({
+  type: ADVERT_DETAIL_PENDING,
+});
+export const advertDetailFulfilled = advert => ({
+  type: ADVERT_DETAIL_FULFILLED,
+  payload: advert
+});
+export const advertDetailRejected = error => ({
+  type: ADVERT_DETAIL_REJECTED,
+  payload: error,
+  error: true,
+});
+
+//Defino el thunk para una anuncio concreto
+export const loadAdvert = advertId => {
+  return async function (dispatch, getState, { services: { adverts } }) {
+    // if (getAdvert(advertId)(getState())) {
+    //   return;
+    // }
+    try {
+      dispatch(advertsLoadedPending());
+      const loadedAdvertOne = await adverts.getAdverts(advertId);
+      dispatch(advertDetailFulfilled(loadedAdvertOne));
+    } catch (error) {
+      dispatch(advertDetailRejected(error));
+      throw error;
+    }
+
+
   };
 };
 

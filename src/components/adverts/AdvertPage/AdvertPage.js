@@ -1,40 +1,62 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useParams, useNavigate } from 'react-router-dom';
 
 import AdvertDetail from './AdvertDetail';
-import { getAdvert, deleteAdvert } from '../service';
+//import { getAdvert, deleteAdvert } from '../service';
+import { getStateAdvert } from '../../../store/selectors';
+
 import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
+import { loadAdvert } from '../../../store/actions';
+import { getUi } from '../../../store/selectors';
 
 function AdvertPage() {
   const { advertId } = useParams();
-  const navigate = useNavigate();
-  const [advert, setAdvert] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const advert = useSelector(getStateAdvert(advertId));
+  const { isLoading } = useSelector(getUi);
+  const dispatch = useDispatch();
+
+  //Quitar?
+  //const [advert, setAdvert] = useState(null);
+  //const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   getAdvert(advertId)
+  //     .then(advert => {
+  //       setAdvert(advert);
+  //       setIsLoading(false);
+  //     })
+  //     .catch(error => {
+  //       setIsLoading(false);
+  //       navigateAfterRequestError(error, navigate);
+  //     });
+  // }, [advertId, navigate]);
 
   useEffect(() => {
-    setIsLoading(true);
-    getAdvert(advertId)
-      .then(advert => {
-        setAdvert(advert);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        setIsLoading(false);
-        navigateAfterRequestError(error, navigate);
-      });
-  }, [advertId, navigate]);
+    dispatch(loadAdvert(advertId));
+  }, [dispatch, advertId]);
 
-  const handleDelete = async () => {
-    setIsLoading(true);
-    try {
-      await deleteAdvert(advertId);
-      setIsLoading(false);
-      navigate('/');
-    } catch (error) {
-      setIsLoading(false);
-      navigateAfterRequestError(error, navigate);
-    }
-  };
+  //Añadir esto para sustituir el parrafo de docutemporal
+  // const handleDelete = () => {
+  //   deleteAdvert(advertId);
+  // };
+
+  //DOcu temporal
+  // const handleDelete = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     await deleteAdvert(advertId);
+  //     setIsLoading(false);
+  //     navigate('/');
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     navigateAfterRequestError(error, navigate);
+  //   }
+  // };
 
   if (isLoading) {
     return 'Loading...';

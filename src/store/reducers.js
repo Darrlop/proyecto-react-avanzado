@@ -13,7 +13,8 @@ import {
   // ADVERT_NEW_PENDING,
   // ADVERT_NEW_FULFILLED,
   // ADVERT_NEW_REJECTED,
-  UI_RESET_ERROR
+  UI_RESET_ERROR,
+  ADVERT_DETAIL_FULFILLED
 } from './types'
 import { func } from 'prop-types';
 
@@ -46,6 +47,8 @@ export function adverts(state = defaultState.adverts, action) {
   switch (action.type) {
     case ADVERTS_LOADED_FULFILLED:
       return { loaded: true, data: action.payload };
+    case ADVERT_DETAIL_FULFILLED:
+      return { ...state, data: [action.payload] };
     default:
       return state;
   }
