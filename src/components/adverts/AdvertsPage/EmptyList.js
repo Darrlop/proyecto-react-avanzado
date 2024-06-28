@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 function EmptyList({ advertsCount }) {
   return (
     <div>
-      <p>No adverts here!</p>
+      <p>Lo siento, no hay anuncios disponibles</p>
       {advertsCount > 0 ? (
-        'Refine your search'
+        'Redefine tu búsqueda'
       ) : (
-        <Link to="new">Create the first advert</Link>
+        <Link to="new">Anímate y crea el 1º anuncio</Link>
       )}
     </div>
   );

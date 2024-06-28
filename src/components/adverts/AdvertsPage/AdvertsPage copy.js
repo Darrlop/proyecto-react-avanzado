@@ -1,38 +1,41 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
 import FiltersForm from './FiltersForm';
 import AdvertsList from './AdvertsList';
 import EmptyList from './EmptyList';
 import storage from '../../../utils/storage';
+
+import { getAdverts } from '../service';
 import { defaultFilters, filterAdverts } from './filters';
 
-import { getStateAdverts } from '../../../store/selectors';
-import { getUi } from '../../../store/selectors';
-//import { useNavigate } from 'react-router-dom';
-//import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
-import { loadAdverts } from '../../../store/actions';
+import { useNavigate } from 'react-router-dom';
+import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
 
 const getFilters = () => storage.get('filters') || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters);
 
-
 function AdvertsPage() {
-
-  const dispatch = useDispatch();
-  const adverts = useSelector(getStateAdverts);
-  const { isLoading } = useSelector(getUi);
+  const navigate = useNavigate();
+  const [adverts, setAdverts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [filters, setFilters] = useState(getFilters);
 
   useEffect(() => {
-    dispatch(loadAdverts());
-  }, [dispatch]);
-
+    setIsLoading(true);
+    getAdverts()
+      .then(adverts => {
+        setIsLoading(false);
+        setAdverts(adverts);
+      })
+      .catch(error => {
+        setIsLoading(false);
+        navigateAfterRequestError(error, navigate);
+      });
+  }, [navigate]);
 
   useEffect(() => {
     saveFilters(filters);
   }, [filters]);
-
 
   const filteredAdverts = filterAdverts(adverts, filters);
 

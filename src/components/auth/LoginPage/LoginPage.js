@@ -23,20 +23,21 @@ function LoginPage() {
   });
 
 
-  const handleSubmit = async credentials => {
+  const handleSubmit = credentials => {
     //event.preventDefault(); <- arror eslint. Deprecated.
     // window.event.preventDefault();
-    // dispatch(authLogin(credentials));
-    try {
-      dispatch(authLoginPending());
-      await login(credentials);
-      dispatch(authLoginFulfilled());
-      dispatch(authLogin());
-      const to = location.state?.from?.pathname || '/';
-      navigate(to);
-    } catch (error) {
-      dispatch(authLoginRejected(error));
-    }
+    dispatch(authLogin(credentials));
+    //----BALZIA borrar si funciona
+    // try {
+    //   dispatch(authLoginPending());
+    //   await login(credentials);
+    //   dispatch(authLoginFulfilled());
+    //   dispatch(authLogin());
+    //   const to = location.state?.from?.pathname || '/';
+    //   navigate(to);
+    // } catch (error) {
+    //   dispatch(authLoginRejected(error));
+    // }
   };
 
   return (

@@ -4,9 +4,9 @@ import {
   AUTH_LOGIN_FULFILLED,
   AUTH_LOGIN_REJECTED,
   AUTH_LOGOUT,
-  // ADVERTS_LOADED_PENDING,
-  // ADVERTS_LOADED_FULFILLED,
-  // ADVERTS_LOADED_REJECTED,
+  ADVERTS_LOADED_PENDING,
+  ADVERTS_LOADED_FULFILLED,
+  ADVERTS_LOADED_REJECTED,
   // ADVERT_DETAIL_PENDING,
   // ADVERT_DETAIL_FULFILLED,
   // ADVERT_DETAIL_REJECTED,
@@ -21,6 +21,10 @@ import { func } from 'prop-types';
 //BALIZA falta adverts y ui
 export const defaultState = {
   auth: false,
+  adverts: {
+    loaded: false,
+    data: []
+  },
   ui: {
     pending: false,
     error: null,
@@ -37,6 +41,15 @@ export function auth(state = defaultState.auth, action) {
       return state;
   }
 };
+
+export function adverts(state = defaultState.adverts, action) {
+  switch (action.type) {
+    case ADVERTS_LOADED_FULFILLED:
+      return { loaded: true, data: action.payload };
+    default:
+      return state;
+  }
+}
 
 //BALIZA falta añadir los advets y  luego refactorizar con combineReducers
 // export default function reducer(state = defaultState, action) {

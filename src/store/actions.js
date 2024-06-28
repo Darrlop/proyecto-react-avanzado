@@ -1,3 +1,4 @@
+import { getAdvert, getAreAdvertsLoaded, getAreTagsLoaded } from './selectors';
 import {
   AUTH_LOGIN_PENDING,
   AUTH_LOGIN_FULFILLED,
@@ -50,6 +51,43 @@ export const authLogin = credentials => {
 export const authLogout = () => ({
   type: AUTH_LOGOUT,
 });
+
+
+export const advertsLoadedPending = () => ({
+  type: ADVERTS_LOADED_PENDING,
+});
+export const advertsLoadedFulfilled = adverts => ({
+  type: ADVERTS_LOADED_FULFILLED,
+  payload: adverts
+});
+export const advertsLoadedRejected = error => ({
+  type: ADVERTS_LOADED_REJECTED,
+  payload: error,
+  error: true,
+});
+
+
+
+//Defino el thunk para anuncios
+export const loadAdverts = () => {
+  return async function (dispatch, getState, { services: { adverts } }) {
+
+    //Detecto si hay anuncios ya cargados para no repetir operación
+    const state = getState();
+    if (getAreAdvertsLoaded(state)) {
+      return;
+    }
+
+    try {
+      dispatch(advertsLoadedPending());
+      const loadedAdverts = await adverts.getAdverts();
+      dispatch(advertsLoadedFulfilled(loadedAdverts));
+    } catch (error) {
+      dispatch(advertsLoadedRejected(error));
+      throw error;
+    }
+  };
+};
 
 
 export const uiResetError = () => ({

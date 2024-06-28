@@ -7,7 +7,8 @@ export const getTags = () => {
 };
 
 export const getAdverts = () => {
-  return client.get(advertsPath);
+  //return client.get(advertsPath);
+  return client.get(`${advertsPath}`);
 };
 
 export const getAdvert = advertId => {
