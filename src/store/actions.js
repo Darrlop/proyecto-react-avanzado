@@ -15,6 +15,9 @@ import {
   ADVERT_DELETED_PENDING,
   ADVERT_DELETED_FULFILLED,
   ADVERT_DELETED_REJECTED,
+  TAGS_LOADED_PENDING,
+  TAGS_LOADED_FULFILLED,
+  TAGS_LOADED_REJECTED,
   UI_RESET_ERROR
 } from './types'
 
@@ -177,6 +180,31 @@ export const createNewAdvert = newAdvert => {
     }
   };
 };
+
+
+export const tagsLoadedPending = () => ({
+  TAGS_LOADED_PENDING
+});
+export const tagsLoadedFulfilled = tags => ({
+  type: TAGS_LOADED_FULFILLED,
+  payload: tags,
+});
+export const tagsLoadedRejected = error => ({
+  type: TAGS_LOADED_REJECTED,
+  payload: error,
+  error: true,
+});
+
+export const loadTags = () => {
+  return async function (dispatch, getState, { services: { adverts } }) {
+    if (getAreTagsLoaded(getState())) {
+      return;
+    }
+    const tags = await adverts.getTags();
+    dispatch(tagsLoadedFulfilled(tags));
+  };
+};
+
 
 export const uiResetError = () => ({
   type: UI_RESET_ERROR,

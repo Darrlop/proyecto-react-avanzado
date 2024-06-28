@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { getTags } from '../service';
+
 import { CheckboxGroup } from '../../common';
+import { useSelector, useDispatch } from 'react-redux';
+//import { getTags } from '../service';
+import { getTags } from '../../../store/selectors';
+import { loadTags } from '../../../store/actions';
+
+
 
 function SelectTags(props) {
-  const [tags, setTags] = useState([]);
+
+  const dispatch = useDispatch();
+  const tags = useSelector(getTags);
 
   useEffect(() => {
-    getTags().then(setTags);
-  }, []);
+    dispatch(loadTags());
+  }, [dispatch]);
 
   return <CheckboxGroup options={tags} {...props} />;
 }

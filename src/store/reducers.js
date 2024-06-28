@@ -14,6 +14,9 @@ import {
   // ADVERT_NEW_PENDING,
   // ADVERT_NEW_FULFILLED,
   // ADVERT_NEW_REJECTED,
+  TAGS_LOADED_PENDING,
+  TAGS_LOADED_FULFILLED,
+  TAGS_LOADED_REJECTED,
   UI_RESET_ERROR,
   ADVERT_DETAIL_FULFILLED
 } from './types'
@@ -27,9 +30,10 @@ export const defaultState = {
     loaded: false,
     data: []
   },
+  tags: [],
   ui: {
     pending: false,
-    error: null,
+    error: null
   }
 };
 
@@ -59,6 +63,20 @@ export function adverts(state = defaultState.adverts, action) {
       return state;
   }
 }
+
+
+
+export function tags(state = defaultState.tags, action) {
+  switch (action.type) {
+    case TAGS_LOADED_FULFILLED:
+      return action.payload;
+    default:
+      return state;
+  };
+}
+// export const tags = (state = defaultState.tags, action) =>
+//   action.type === TAGS_LOADED ? action.payload : state;
+
 
 
 export function ui(state = defaultState.ui, action) {

@@ -31,5 +31,8 @@ export const ADVERT_DELETED_PENDING = 'adverts/:advertId/pending';
 export const ADVERT_DELETED_FULFILLED = 'adverts/:advertId/fulfilled';
 export const ADVERT_DELETED_REJECTED = 'adverts/:advertId/rejected';
 
+export const TAGS_LOADED_PENDING = 'adverts/tags/pendind';
+export const TAGS_LOADED_FULFILLED = 'adverts/tags/fulfilled';
+export const TAGS_LOADED_REJECTED = 'adverts/tags/rejected';
 
 export const UI_RESET_ERROR = 'ui/reset-error';

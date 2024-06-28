@@ -15,6 +15,7 @@ export const getAdvert = advertId => state => getStateAdverts(state).find(advert
 //   };
 // }
 
-
+export const getAreTagsLoaded = state => getTags(state).length > 0;
+export const getTags = state => state.tags;
 
 export const getUi = state => state.ui;
