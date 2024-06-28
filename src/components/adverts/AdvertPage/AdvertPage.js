@@ -6,8 +6,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import AdvertDetail from './AdvertDetail';
 //import { getAdvert, deleteAdvert } from '../service';
-import { getStateAdvert } from '../../../store/selectors';
-import { getAdvert } from '../service';
+import { getAdvert } from '../../../store/selectors';
+
 
 import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
 import { loadAdvert } from '../../../store/actions';
@@ -19,8 +19,8 @@ import { getUi } from '../../../store/selectors';
 function AdvertPage() {
   const { advertId } = useParams();
 
-  const advert = useSelector(getStateAdvert(advertId));
-  console.log(advert)
+  // const advert = useSelector(getAdvert(advertId));
+  // console.log("advert en page", advert)
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
 
@@ -45,6 +45,8 @@ function AdvertPage() {
     dispatch(loadAdvert(advertId));
   }, [dispatch, advertId]);
 
+  const advert = useSelector(getAdvert(advertId));
+  console.log("advert en page", advert)
 
   const handleDeleteAdvert = () => {
     dispatch(deleteAdvert(advertId));
@@ -68,10 +70,10 @@ function AdvertPage() {
   }
 
   return (
-    // advert && (
-    //   <AdvertDetail onDelete={handleDeleteAdvert} isLoading={isLoading} {...advert} />
-    // )
-    <p>Prueba</p>
+    advert && (
+      <AdvertDetail onDelete={handleDeleteAdvert} isLoading={isLoading} {...advert} />
+    )
+    // <p>Prueba</p>
   );
 }
 

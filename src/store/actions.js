@@ -1,4 +1,3 @@
-import { getAdvert, getAreAdvertsLoaded, getAreTagsLoaded } from './selectors';
 import {
   AUTH_LOGIN_PENDING,
   AUTH_LOGIN_FULFILLED,
@@ -18,6 +17,8 @@ import {
   ADVERT_DELETE_REJECTED,
   UI_RESET_ERROR
 } from './types'
+
+import { getAdvert, getAreAdvertsLoaded, getAreTagsLoaded } from './selectors';
 
 export const authLoginPending = () => ({
   type: AUTH_LOGIN_PENDING,
@@ -106,9 +107,9 @@ export const advertDetailRejected = error => ({
 //Defino el thunk para una anuncio concreto
 export const loadAdvert = advertId => {
   return async function (dispatch, getState, { services: { adverts } }) {
-    // if (getAdvert(advertId)(getState())) {
-    //   return;
-    // }
+    if (getAdvert(advertId)(getState())) {
+      return;
+    }
     try {
       dispatch(advertsLoadedPending());
       const loadedAdvertOne = await adverts.getAdverts(advertId);
@@ -117,8 +118,6 @@ export const loadAdvert = advertId => {
       dispatch(advertDetailRejected(error));
       throw error;
     }
-
-
   };
 };
 
