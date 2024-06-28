@@ -7,15 +7,20 @@ import { useParams, useNavigate } from 'react-router-dom';
 import AdvertDetail from './AdvertDetail';
 //import { getAdvert, deleteAdvert } from '../service';
 import { getStateAdvert } from '../../../store/selectors';
+import { getAdvert } from '../service';
 
 import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
 import { loadAdvert } from '../../../store/actions';
+
+//Verificar si es service
+import { deleteAdvert } from '../service';
 import { getUi } from '../../../store/selectors';
 
 function AdvertPage() {
   const { advertId } = useParams();
 
   const advert = useSelector(getStateAdvert(advertId));
+  console.log(advert)
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch();
 
@@ -40,10 +45,10 @@ function AdvertPage() {
     dispatch(loadAdvert(advertId));
   }, [dispatch, advertId]);
 
-  //Añadir esto para sustituir el parrafo de docutemporal
-  // const handleDelete = () => {
-  //   deleteAdvert(advertId);
-  // };
+
+  const handleDeleteAdvert = () => {
+    dispatch(deleteAdvert(advertId));
+  };
 
   //DOcu temporal
   // const handleDelete = async () => {
@@ -63,9 +68,10 @@ function AdvertPage() {
   }
 
   return (
-    advert && (
-      <AdvertDetail onDelete={handleDelete} isLoading={isLoading} {...advert} />
-    )
+    // advert && (
+    //   <AdvertDetail onDelete={handleDeleteAdvert} isLoading={isLoading} {...advert} />
+    // )
+    <p>Prueba</p>
   );
 }
 

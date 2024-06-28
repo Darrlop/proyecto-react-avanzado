@@ -13,6 +13,9 @@ import {
   ADVERT_NEW_PENDING,
   ADVERT_NEW_FULFILLED,
   ADVERT_NEW_REJECTED,
+  ADVERT_DELETE_PENDING,
+  ADVERT_DELETE_FULFILLED,
+  ADVERT_DELETE_REJECTED,
   UI_RESET_ERROR
 } from './types'
 
@@ -116,6 +119,33 @@ export const loadAdvert = advertId => {
     }
 
 
+  };
+};
+
+
+export const advertsDeletedRequest = () => ({
+  type: ADVERT_DELETE_PENDING,
+});
+export const advertsDeletedSuccess = advert => ({
+  type: ADVERT_DELETE_FULFILLED,
+  payload: advert
+});
+export const advertsDeletedFailure = error => ({
+  type: ADVERT_DELETE_REJECTED,
+  error: true,
+  payload: error
+});
+
+export const deleteAdvert = advertId => {
+  return async function (dispatch, _getState, { services: { adverts }, router }) {
+    try {
+      dispatch(advertsDeletedRequest());
+      await adverts.deleteAdvert(advertId);
+      dispatch(advertsDeletedSuccess(advertId));
+      router.navigate(`/adverts`);
+    } catch (error) {
+      dispatch(advertsDeletedFailure(error));
+    }
   };
 };
 

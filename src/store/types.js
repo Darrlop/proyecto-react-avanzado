@@ -27,4 +27,9 @@ export const ADVERT_NEW_PENDING = 'adverts/new/pending';
 export const ADVERT_NEW_FULFILLED = 'adverts/new/fulfilled';
 export const ADVERT_NEW_REJECTED = 'adverts/new/rejected';
 
+export const ADVERT_DELETE_PENDING = 'adverts/:advertId/pending';
+export const ADVERT_DELETE_FULFILLED = 'adverts/:advertId/fulfilled';
+export const ADVERT_DELETE_REJECTED = 'adverts/:advertId/rejected';
+
+
 export const UI_RESET_ERROR = 'ui/reset-error';
