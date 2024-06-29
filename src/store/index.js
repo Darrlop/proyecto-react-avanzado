@@ -7,14 +7,13 @@ import * as actionCreators from './actions';
 import * as auth from '../components/auth/service';
 import * as adverts from '../components/adverts/service'
 
-//import { failureRedirects } from './middleware';
+import { failureRedirects } from './middlewares';
 
 
 const reducer = combineReducers(reducers);
 
 // composeEnhancers para habilitar devtools
 const composeEnhancers = composeWithDevTools({ actionCreators });
-
 
 export default function configureStore(preloadedState, { router }) {
   const store = createStore(
@@ -23,14 +22,13 @@ export default function configureStore(preloadedState, { router }) {
     composeEnhancers(
       applyMiddleware(
         withExtraArgument({ services: { auth, adverts }, router }),
-        // failureRedirects(router, {
-        //   401: '/login',
-        //   404: '/404',
-        // }),
+        failureRedirects(router, {
+          401: '/login',
+          404: '/404',
+        }),
       ),
     ),
   );
-
 
   return store;
 }
