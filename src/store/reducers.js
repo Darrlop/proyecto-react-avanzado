@@ -8,7 +8,7 @@ import {
   ADVERTS_LOADED_FULFILLED,
   ADVERTS_LOADED_REJECTED,
   // ADVERT_DETAIL_PENDING,
-  // ADVERT_DETAIL_FULFILLED,
+  ADVERT_DETAIL_FULFILLED,
   // ADVERT_DETAIL_REJECTED,
   ADVERT_DELETED_FULFILLED,
   // ADVERT_NEW_PENDING,
@@ -18,12 +18,10 @@ import {
   TAGS_LOADED_FULFILLED,
   TAGS_LOADED_REJECTED,
   UI_RESET_ERROR,
-  ADVERT_DETAIL_FULFILLED
 } from './types'
 import { func } from 'prop-types';
 
 
-//BALIZA falta adverts y ui
 export const defaultState = {
   auth: false,
   adverts: {
@@ -74,10 +72,6 @@ export function tags(state = defaultState.tags, action) {
       return state;
   };
 }
-// export const tags = (state = defaultState.tags, action) =>
-//   action.type === TAGS_LOADED ? action.payload : state;
-
-
 
 export function ui(state = defaultState.ui, action) {
   switch (action.type) {

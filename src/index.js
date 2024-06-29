@@ -10,8 +10,6 @@ import { Provider } from 'react-redux';
 import configureStore from './store';
 import ErrorBoundary from './components/errors/ErrorBoundary';
 
-//xx import { AuthProvider } from './components/auth/context';
-
 
 const accessToken = storage.get('auth');
 configureClient({ accessToken });

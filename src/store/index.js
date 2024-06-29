@@ -1,13 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { thunk, withExtraArgument } from "redux-thunk";
+import { withExtraArgument } from "redux-thunk";
 
 import * as reducers from './reducers';
 import * as actionCreators from './actions';
 import * as auth from '../components/auth/service';
 import * as adverts from '../components/adverts/service'
 
-//import { failureRedirects, logger, timestamp } from './middleware';
+//import { failureRedirects } from './middleware';
 
 
 const reducer = combineReducers(reducers);

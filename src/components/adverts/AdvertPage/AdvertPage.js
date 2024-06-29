@@ -1,18 +1,12 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { useParams, useNavigate } from 'react-router-dom';
 
 import AdvertDetail from './AdvertDetail';
-//import { getAdvert, deleteAdvert } from '../service';
 import { getAdvert } from '../../../store/selectors';
-
-
 import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
 import { loadAdvert } from '../../../store/actions';
-
-//Verificar si es service
 import { deleteAdvert } from '../service';
 import { getUi } from '../../../store/selectors';
 
@@ -32,18 +26,6 @@ function AdvertPage() {
     dispatch(deleteAdvert(advertId));
   };
 
-  //DOcu temporal
-  // const handleDelete = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     await deleteAdvert(advertId);
-  //     setIsLoading(false);
-  //     navigate('/');
-  //   } catch (error) {
-  //     setIsLoading(false);
-  //     navigateAfterRequestError(error, navigate);
-  //   }
-  // };
 
   if (isLoading) {
     return 'Loading...';

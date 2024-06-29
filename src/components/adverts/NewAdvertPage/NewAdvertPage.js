@@ -11,12 +11,10 @@ function NewAdvertPage() {
   const dispatch = useDispatch();
 
   const handleSubmit = newAdvert => {
-    //createAdvert(newAdvert);
     dispatch(createNewAdvert(newAdvert))
   };
 
   return <NewAdvertForm onSubmit={handleSubmit} />;
 }
-
 
 export default NewAdvertPage;

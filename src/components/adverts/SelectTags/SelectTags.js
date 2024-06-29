@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 
 import { CheckboxGroup } from '../../common';
 import { useSelector, useDispatch } from 'react-redux';
-//import { getTags } from '../service';
 import { getTags } from '../../../store/selectors';
 import { loadTags } from '../../../store/actions';
 

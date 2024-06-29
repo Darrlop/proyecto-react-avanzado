@@ -1,10 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { login } from '../service';
 import LoginForm from './LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { authLogin, authLoginFulfilled, authLoginPending, authLoginRejected, uiResetError } from '../../../store/actions';
+import { authLogin, uiResetError } from '../../../store/actions';
 import { getUi } from '../../../store/selectors';
 
 function LoginPage() {

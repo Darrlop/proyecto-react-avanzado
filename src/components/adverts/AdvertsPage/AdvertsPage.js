@@ -9,7 +9,6 @@ import { defaultFilters, filterAdverts } from './filters';
 
 import { getStateAdverts } from '../../../store/selectors';
 import { getUi } from '../../../store/selectors';
-//import { useNavigate } from 'react-router-dom';
 //import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
 import { loadAdverts } from '../../../store/actions';
 
