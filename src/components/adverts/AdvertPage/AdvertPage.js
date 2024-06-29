@@ -1,13 +1,13 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import AdvertDetail from './AdvertDetail';
 import { getAdvert } from '../../../store/selectors';
-import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
 import { loadAdvert } from '../../../store/actions';
 import { deleteAdvert } from '../service';
+import { deleteAdvertOne } from '../../../store/actions';
 import { getUi } from '../../../store/selectors';
 
 function AdvertPage() {
@@ -22,8 +22,9 @@ function AdvertPage() {
     dispatch(loadAdvert(advertId));
   }, [dispatch, advertId]);
 
-  const handleDeleteAdvert = () => {
-    dispatch(deleteAdvert(advertId));
+
+  function handleDeleteAdvert() {
+    dispatch(deleteAdvertOne(advertId));
   };
 
 

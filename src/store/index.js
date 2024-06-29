@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { withExtraArgument } from "redux-thunk";
+import { thunk, withExtraArgument } from "redux-thunk";
 
 import * as reducers from './reducers';
 import * as actionCreators from './actions';

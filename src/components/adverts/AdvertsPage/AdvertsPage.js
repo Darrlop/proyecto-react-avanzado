@@ -8,6 +8,7 @@ import storage from '../../../utils/storage';
 import { defaultFilters, filterAdverts } from './filters';
 
 import { getStateAdverts } from '../../../store/selectors';
+import { getAdverts } from '../service';
 import { getUi } from '../../../store/selectors';
 //import navigateAfterRequestError from '../../../utils/navigateAfterRequestError';
 import { loadAdverts } from '../../../store/actions';
@@ -17,19 +18,17 @@ const saveFilters = filters => storage.set('filters', filters);
 
 
 function AdvertsPage() {
-
   const dispatch = useDispatch();
+
+
   const adverts = useSelector(getStateAdverts);
-  console.log("ADVERTS ->", adverts)
+  //const adverts = useSelector(getAdverts);
   const { isLoading } = useSelector(getUi);
   const [filters, setFilters] = useState(getFilters);
 
   useEffect(() => {
     dispatch(loadAdverts());
-    // 
-  }, [dispatch(loadAdverts())]);
-
-
+  }, [dispatch]);
 
   useEffect(() => {
     saveFilters(filters);

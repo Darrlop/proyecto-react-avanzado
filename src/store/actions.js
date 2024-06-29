@@ -2,7 +2,7 @@ import {
   AUTH_LOGIN_PENDING,
   AUTH_LOGIN_FULFILLED,
   AUTH_LOGIN_REJECTED,
-  AUTH_LOGOUT,
+  AUTH_LOGOUT_FULFILLED,
   ADVERTS_LOADED_PENDING,
   ADVERTS_LOADED_FULFILLED,
   ADVERTS_LOADED_REJECTED,
@@ -22,7 +22,6 @@ import {
 } from './types'
 
 import { getAdvert, getAreAdvertsLoaded, getAreTagsLoaded } from './selectors';
-import { createAdvert } from '../components/adverts/service';
 
 
 export const authLoginPending = () => ({
@@ -57,10 +56,17 @@ export const authLogin = credentials => {
 };
 
 
-export const authLogout = () => ({
-  type: AUTH_LOGOUT,
+export const authLogoutFulfilled = () => ({
+  type: AUTH_LOGOUT_FULFILLED,
 });
 
+export function authLogout() {
+  return async function (dispatch, _getState, { services: { auth }, router }) {
+    await auth.logout();
+    dispatch(authLogoutFulfilled());
+    router.navigate('/login');
+  };
+}
 
 export const advertsLoadedPending = () => ({
   type: ADVERTS_LOADED_PENDING,
@@ -127,28 +133,28 @@ export const loadAdvert = advertId => {
 };
 
 
-export const advertsDeletedPending = () => ({
+export const advertDeletedPending = () => ({
   type: ADVERT_DELETED_PENDING,
 });
-export const advertsDeletedFulfilled = advert => ({
+export const advertDeletedFulfilled = advertId => ({
   type: ADVERT_DELETED_FULFILLED,
-  payload: advert
+  payload: advertId
 });
-export const advertsDeletedRejected = error => ({
+export const advertDeletedRejected = error => ({
   type: ADVERT_DELETED_REJECTED,
   error: true,
   payload: error
 });
 
-export const deleteAdvert = advertId => {
+export const deleteAdvertOne = advertId => {
   return async function (dispatch, _getState, { services: { adverts }, router }) {
     try {
-      dispatch(advertsDeletedPending());
+      dispatch(advertDeletedPending());
       await adverts.deleteAdvert(advertId);
-      dispatch(advertsDeletedFulfilled(advertId));
+      dispatch(advertDeletedFulfilled(advertId));
       router.navigate(`/adverts`);
     } catch (error) {
-      dispatch(advertsDeletedRejected(error));
+      dispatch(advertDeletedRejected(error));
     }
   };
 };
@@ -173,8 +179,7 @@ export const createNewAdvert = newAdvert => {
       dispatch(advertNewPending());
       const advert = await adverts.createAdvert(newAdvert);
       dispatch(advertNewFulfilled(advert));
-      // router.navigate(`/adverts/${advert.id}`);
-      router.navigate(`/adverts`);
+      router.navigate(`/adverts/${advert.id}`);
     } catch (error) {
       dispatch(advertNewRejected(error));
     }

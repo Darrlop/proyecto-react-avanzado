@@ -19,5 +19,9 @@ export const login = ({ remember, ...credentials }) => {
 };
 
 export const logout = () => {
-  return Promise.resolve().then(resetClient).then(storage.clear);
+  // return Promise.resolve()
+  //   .then(resetClient)
+  //   .then(storage.clear);
+  resetClient();
+  storage.clear();
 };

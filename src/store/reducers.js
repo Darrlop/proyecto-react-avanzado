@@ -1,9 +1,8 @@
-import { combineReducers } from 'redux';
 import {
   AUTH_LOGIN_PENDING,
   AUTH_LOGIN_FULFILLED,
   AUTH_LOGIN_REJECTED,
-  AUTH_LOGOUT,
+  AUTH_LOGOUT_FULFILLED,
   ADVERTS_LOADED_PENDING,
   ADVERTS_LOADED_FULFILLED,
   ADVERTS_LOADED_REJECTED,
@@ -19,7 +18,6 @@ import {
   TAGS_LOADED_REJECTED,
   UI_RESET_ERROR,
 } from './types'
-import { func } from 'prop-types';
 
 
 export const defaultState = {
@@ -39,7 +37,7 @@ export function auth(state = defaultState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_FULFILLED:
       return true;
-    case AUTH_LOGOUT:
+    case AUTH_LOGOUT_FULFILLED:
       return false;
     default:
       return state;
@@ -49,7 +47,6 @@ export function auth(state = defaultState.auth, action) {
 export function adverts(state = defaultState.adverts, action) {
   switch (action.type) {
     case ADVERTS_LOADED_FULFILLED:
-      console.log("action.payload --> ", action.payload);
       return { loaded: true, data: action.payload };
     case ADVERT_DETAIL_FULFILLED:
       return { ...state, data: [action.payload] };
@@ -66,7 +63,6 @@ export function adverts(state = defaultState.adverts, action) {
 }
 
 
-
 export function tags(state = defaultState.tags, action) {
   switch (action.type) {
     case TAGS_LOADED_FULFILLED:
@@ -76,17 +72,20 @@ export function tags(state = defaultState.tags, action) {
   };
 }
 
+
 export function ui(state = defaultState.ui, action) {
-  switch (action.type) {
-    case UI_RESET_ERROR:
-      return { ...state, error: null };
-    case AUTH_LOGIN_PENDING:
-      return { ...state, pending: true };
-    case AUTH_LOGIN_FULFILLED:
-      return { ...state, pending: false, error: null };
-    case AUTH_LOGIN_REJECTED:
-      return { ...state, pending: false, error: action.payload };
-    default:
-      return state;
+  if (action.type === UI_RESET_ERROR) {
+    return { ...state, error: null };
   }
+  if (action.error) {
+    return { ...state, pending: false, error: action.payload };
+  }
+  if (action.type.endsWith('/pending')) {
+    return { ...state, pending: true, error: null };
+  }
+  if (action.type.endsWith('/fulfilled')) {
+    return { ...state, pending: false, error: null };
+  }
+
+  return state;
 }
