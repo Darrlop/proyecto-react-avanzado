@@ -12,7 +12,7 @@ import {
   // ADVERT_DETAIL_REJECTED,
   ADVERT_DELETED_FULFILLED,
   // ADVERT_NEW_PENDING,
-  // ADVERT_NEW_FULFILLED,
+  ADVERT_NEW_FULFILLED,
   // ADVERT_NEW_REJECTED,
   TAGS_LOADED_PENDING,
   TAGS_LOADED_FULFILLED,
@@ -49,9 +49,12 @@ export function auth(state = defaultState.auth, action) {
 export function adverts(state = defaultState.adverts, action) {
   switch (action.type) {
     case ADVERTS_LOADED_FULFILLED:
+      console.log("action.payload --> ", action.payload);
       return { loaded: true, data: action.payload };
     case ADVERT_DETAIL_FULFILLED:
       return { ...state, data: [action.payload] };
+    case ADVERT_NEW_FULFILLED:
+      return { ...state, data: [...state.data, action.payload] };
     case ADVERT_DELETED_FULFILLED:
       return {
         ...state,

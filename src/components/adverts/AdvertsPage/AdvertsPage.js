@@ -20,12 +20,14 @@ function AdvertsPage() {
 
   const dispatch = useDispatch();
   const adverts = useSelector(getStateAdverts);
+  console.log("ADVERTS ->", adverts)
   const { isLoading } = useSelector(getUi);
   const [filters, setFilters] = useState(getFilters);
 
   useEffect(() => {
     dispatch(loadAdverts());
-  }, [dispatch]);
+    // 
+  }, [dispatch(loadAdverts())]);
 
 
 

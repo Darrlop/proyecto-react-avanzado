@@ -173,7 +173,7 @@ export const createNewAdvert = newAdvert => {
       dispatch(advertNewPending());
       const advert = await adverts.createAdvert(newAdvert);
       dispatch(advertNewFulfilled(advert));
-      //router.navigate(`/adverts/${advert.id}`);
+      // router.navigate(`/adverts/${advert.id}`);
       router.navigate(`/adverts`);
     } catch (error) {
       dispatch(advertNewRejected(error));
