@@ -17,18 +17,22 @@ function LoginForm({ onSubmit, isLoading }) {
     remember: false,
   });
   const { email, password, remember } = credentials;
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input name="email" value={email} onChange={handleChange} />
+      <label htmlFor="email">Email:
+        <input id="email" name="email" value={email} onChange={handleChange} />
+      </label>
+      <label htmlFor="password">Password:
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+        />
+      </label>
       <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={handleChange}
-      />
-      <input
-        type="checkbox"
+        type="checkbox" u
         name="remember"
         checked={remember}
         onChange={handleChange}
