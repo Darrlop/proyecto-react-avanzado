@@ -123,7 +123,8 @@ export const loadAdvert = advertId => {
     }
     try {
       dispatch(advertsLoadedPending());
-      const loadedAdvertOne = await adverts.getAdverts(advertId);
+      //const loadedAdvertOne = await adverts.getAdverts(advertId);
+      const loadedAdvertOne = await adverts.getAdvert(advertId);
       dispatch(advertDetailFulfilled(loadedAdvertOne));
     } catch (error) {
       dispatch(advertDetailRejected(error));

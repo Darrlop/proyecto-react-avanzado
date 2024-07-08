@@ -16,11 +16,16 @@ export const ADVERT_NEW_PENDING = 'adverts/new/pending';
 export const ADVERT_NEW_FULFILLED = 'adverts/new/fulfilled';
 export const ADVERT_NEW_REJECTED = 'adverts/new/rejected';
 
-export const ADVERT_DELETED_PENDING = 'adverts/:advertId/pending';
-export const ADVERT_DELETED_FULFILLED = 'adverts/:advertId/fulfilled';
-export const ADVERT_DELETED_REJECTED = 'adverts/:advertId/rejected';
+//ajusto los tipos para que no coincidan con los de advert_detail
+// export const ADVERT_DELETED_PENDING = 'adverts/:advertId/pending';
+// export const ADVERT_DELETED_FULFILLED = 'adverts/:advertId/fulfilled';
+// export const ADVERT_DELETED_REJECTED = 'adverts/:advertId/rejected';
+export const ADVERT_DELETED_PENDING = 'adverts/:advertId/delete_pending';
+export const ADVERT_DELETED_FULFILLED = 'adverts/:advertId/delete_fulfilled';
+export const ADVERT_DELETED_REJECTED = 'adverts/:advertId/delete_rejected';
 
-export const TAGS_LOADED_PENDING = 'adverts/tags/pendind';
+
+export const TAGS_LOADED_PENDING = 'adverts/tags/pending';
 export const TAGS_LOADED_FULFILLED = 'adverts/tags/fulfilled';
 export const TAGS_LOADED_REJECTED = 'adverts/tags/rejected';
 
