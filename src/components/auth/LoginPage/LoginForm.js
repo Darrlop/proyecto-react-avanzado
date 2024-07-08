@@ -32,7 +32,7 @@ function LoginForm({ onSubmit, isLoading }) {
         />
       </label>
       <input
-        type="checkbox" u
+        type="checkbox"
         name="remember"
         checked={remember}
         onChange={handleChange}
