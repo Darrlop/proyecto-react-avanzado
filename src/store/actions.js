@@ -50,7 +50,7 @@ export const authLogin = credentials => {
       router.navigate(to, { replace: true });
     } catch (error) {
       dispatch(authLoginRejected(error));
-      throw error;
+      // throw error;
     }
   };
 };
