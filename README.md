@@ -1,39 +1,101 @@
 # Proyecto React Avanzado con Redux
 
-EL proyecto se ha trabajado en base al proyecto suministrado por el profesor.
 
-Se ha realizado únicamente la adaptación de la aplicación React a redux.
+Este proyecto se basa en una aplicación web desarrolada con **React** y que se conecta a un backend existente, nodepop, el mismo que se utilizó en la práctica de fundamentos. Las implementaciones principales que ofrece son un sistema de gestión de anuncios, con funcionalidades como autenticación de usuarios, obtención de anuncios, creación y borrado de anuncios, y más.
 
-La parte de test no ha podido realizarse, quedando para una segunda entrega.
+La aplicación utilizada ha sido la resolución del profesor de la práctica de Fundamentos React
 
-Se hace esta 1ª entrega para obtener un feedback de la parte de adaptación y sobre los problemas encontrados en ella.
+__EL objetivo principal del proyecto__ es partir de dicha aplicación  **React** y adaptarla a  **Redux**, con todas las ventajas que esto ofrece: gestión de estados en aplicaciones React, mediante una estructura sólida y seguridad en el manejo de estados, y el acceso global a los datos.
 
-***En esta parte ha habido un problema grave que no ha podido ser resuelto:***
+También incluyé un apartado de testing, donde habrá una muestra de los principales tipos test usados en una aplicación de este tipo
 
-- AL borrar un anuncio, se produce un error. Parece ser que, tras el borrado, que es realizado con éxito, el programa vuelve a entrar en advertPage.js y lee el id del anuncio eliminado, llevándolo a advertsPage.js, donde es usado en vez de la cadena de objetos que componen el listado de anuncios general.
+## Objetivos de la práctica conseguidos
 
----
+1. **Configurar un store Redux**:
+   - Almacenar la información sobre la sesión o el usuario registrado en el sistema.
+   - Leer el token desde el LocalStorage al iniciar la aplicación (si existe) y almacenarlo en el store de Redux.
+   - Guardar el estado de la sesión en el store de Redux al hacer login (siempre) y en el Local Storage si se eligió recordar la sesión.
+   - Manejar la obtención de tags disponibles y de anuncios desde el API.
+   - Modelar correctamente el estado que se va a guardar en el store.
+
+2. **Crear acciones y reducers**:
+   - Implementar las acciones y reducers necesarios para cumplir los objetivos del punto 1.
+   - Asegurarse de que las acciones sean síncronas o asíncronas según corresponda.
+
+3. **Conectar los componentes con el store de Redux**:
+   - Utilizar `connect` o hooks (como `useSelector` y `useDispatch`) para conectar los componentes con el store.
+   - Acceder a la información almacenada en el store desde los componentes.
+
+4. **Configurar Redux Dev Tools**:
+   - Facilitar las tareas de debugging de la aplicación utilizando la extensión de Redux Dev Tools en el navegador.
+
+5. **Testing**:
+   - Crear tests unitarios para verificar el correcto funcionamiento de diferentes partes de la aplicación:
+     1. Una acción síncrona.
+     2. Una acción asíncrona.
+     3. Un reducer.
+     4. Un selector.
+     5. Un componente con snapshot testing.
+     6. Comprobar el funcionamiento de un componente que ejecuta una acción del store, mockeando la acción.
+  
+    Los 4 primeros tipos de test están ubicados en la carpeta /src/stores/__ test __
+
+    Las 2 últimos están implementadas en un mismo fichero, alojado en /src/pages/auth/components/__ tests __
+
+## Instrucciones de instalación y ejecución
+
+Este proyecto se creó con [Create React App](https://github.com/facebook/create-react-app).
+
+__Prerrequisitos:__
+
+Tener instalado en tu sistema:
+- Node.js
+- npm
+- MongoDB
+
+__Instalar la api Nodepop:__
+
+- Clona el repositorio de Nodepop desde GitHub:
+
+  `git clone https://github.com/davidjj76/nodepop-api`
+
+- Instala las dependencias:
+  
+  `npm install`
+
+- Ejecuta:
+  
+  `npm run start`
 
 
+__Instalar el proyecto de Redux:__
+
+1. Clonar/descargar este repositorio.
+
+   `git clone https://github.com/Darrlop/proyecto-react-avanzado`
+
+2. Instalar las dependencias
+
+   `npm install`.
+
+3. Ejecutar la aplicación 
+  
+   `npm start`.
+
+   Esto ejecuta la aplicación en modo de desarrollo. Será accesible en un navegador en la dirección [http://localhost:3000](http://localhost:3000)
+
+   La página se recargará si realizas modificaciones. También verás errores de lint en la consola.
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Opciones de desarrollo futuro
 
-## Available Scripts
+- Extraer la lógica común a todos los formularios presentes en la aplicación y reutilizarlo en todos ellos, creando unos componentes
+ que mantengan los valores del formulario y que reciban el valor que le corresponde, así como poder modificar ese valor en el evento on Change
 
-In the project directory, you can run:
+ - Implementación de css para dar un diseño responsive atráctivo a la aplicación 
 
-### `npm run start`
+## Otros
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Sobre Create React App:  [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Sobre React [React documentation](https://reactjs.org/).

@@ -14,7 +14,7 @@ const AuthButton = () => {
 
   const handleLogoutConfirm = async () => {
     await logout();
-    dispatch(authLogout);
+    dispatch(authLogout());
 
   };
 
