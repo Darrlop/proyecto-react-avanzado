@@ -67,8 +67,7 @@ __Instalar la api Nodepop:__
   
   `npm run start`
 
-
-__Instalar el proyecto de Redux:__
+__Instalar y ejecutar el proyecto Redux:__
 
 1. Clonar/descargar este repositorio.
 
@@ -80,11 +79,26 @@ __Instalar el proyecto de Redux:__
 
 3. Ejecutar la aplicación 
   
-   `npm start`.
+   `npm run start`.
 
    Esto ejecuta la aplicación en modo de desarrollo. Será accesible en un navegador en la dirección [http://localhost:3000](http://localhost:3000)
 
    La página se recargará si realizas modificaciones. También verás errores de lint en la consola.
+
+__Testing:__
+
+  - Ejecutar la aplicación en modo testing
+  
+    `npm run test`.
+
+    Esto ejecuta los test en la terminal. Verificar que se ejecutan todos mediante la opción "Press a to run all tests", una vez arrancado.
+
+    El resultado que debe mostrar es:
+
+    - Test Suites: 4 passed, 4 total
+    - Tests:       12 passed, 12 total
+    - Snapshots:   1 passed, 1 total`
+  
 
 
 ## Opciones de desarrollo futuro
